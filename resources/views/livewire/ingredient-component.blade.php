@@ -1,9 +1,10 @@
-<div x-data="{selected:@entangle('ingredientSelected')}" class="container" >
+<div  x-data="{selection:@entangle('selection').defer,
+quantities:@entangle('quantities').defer
+}"   class="container">
+    <span x-html='JSON.stringify(selection)'></span>
+    <span x-html='JSON.stringify(quantities)'></span>
     @foreach ($ingredients as $ingredient)
-        <input type="checkbox"  x-model="selected" class="form-input" value="{{ $ingredient->id }}">
-        <span>{{ $ingredient->name }}</span>
-        <span><input type="text" name=""  placeholder="quantité" class="ml-4" id=""></span>    @endforeach
-        <button wire:click='done'>Allez</button>
-        {{ dump($ingredientSelected) }}
+        <input type="checkbox" name="" id="" x-model='selection' value="{{ $ingredient->name }}">
+        <span>{{ $ingredient->name }}</span><input type="text" value=""  x-model='quantities' name="">
+    @endforeach
 </div>
-
