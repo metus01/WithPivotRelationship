@@ -11,6 +11,6 @@ class Recette extends Model
     use HasFactory;
     public function ingredients() : BelongsToMany
     {
-        return $this->belongsToMany(Recette::class);
+        return $this->belongsToMany(Ingredient::class)->withPivot('quantity');
     }
 }

@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Ingredient extends Model
 {
     use HasFactory;
-    public function recettes () : BelongsToMany
+    public function recettes() : BelongsToMany
     {
-        return $this->belongsToMany(Ingredient::class);
+        return $this->belongsToMany('App\Models\Recette' , 'recette_ingredient' , 'ingredient_id' , 'recette_id');
     }
 }
