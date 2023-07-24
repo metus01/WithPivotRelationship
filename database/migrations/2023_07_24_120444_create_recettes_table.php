@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('recettes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
+            $table->mediumText('description');
             $table->timestamps();
         });
     }

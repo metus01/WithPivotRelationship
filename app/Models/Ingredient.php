@@ -9,6 +9,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Ingredient extends Model
 {
     use HasFactory;
+    protected $fillable =
+    [
+        'name'
+    ];
     public function recettes() : BelongsToMany
     {
         return $this->belongsToMany('App\Models\Recette' , 'recette_ingredient' , 'ingredient_id' , 'recette_id');
