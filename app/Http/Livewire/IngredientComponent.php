@@ -3,20 +3,33 @@
 namespace App\Http\Livewire;
 
 use App\Models\Ingredient;
+use App\Models\Recette;
 use Livewire\Component;
 
 class IngredientComponent extends Component
 {
-    public  array $selection = [];
-    public  array  $quantities = [];
+    public string $name = '';
+    public string $description = '';
+    public   $ingredients = [];
+    public bool $id_added = false;
+    public Recette $recette;
+    public function save()
+    {
+        $this->recette = Recette::create(
+            [
+                'name' => $this->name,
+                'description' => $this->description
+            ]
+            );
+            $this->is_added = true;
+            session()->flash('success' , 'Recipe added with succes');
+    }
+
     public function render()
     {
-        $ingredients = Ingredient::all();
+       $this->ingredients = Ingredient::all();
         return view(
-            'livewire.ingredient-component',
-            [
-                'ingredients' => $ingredients
-            ]
+            'livewire.ingredient-component'
         );
     }
 }
