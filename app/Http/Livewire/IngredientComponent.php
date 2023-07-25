@@ -10,9 +10,22 @@ class IngredientComponent extends Component
 {
     public string $name = '';
     public string $description = '';
-    public   $ingredients = [];
-    public bool $id_added = false;
+    protected $listeners =
+    [
+        'finish' => 'added'
+    ];
+    public bool $is_added = false;
     public Recette $recette;
+    public int $current_id = 0;
+    public function start_add($id)
+    {
+        $this->current_id = $id;
+    }
+    public function added()
+    {
+        $this->reset('current_id');
+        session()->flash('success' , 'Ingredient ajouté avec succes');
+    }
     public function save()
     {
         $this->recette = Recette::create(
@@ -20,16 +33,19 @@ class IngredientComponent extends Component
                 'name' => $this->name,
                 'description' => $this->description
             ]
-            );
-            $this->is_added = true;
-            session()->flash('success' , 'Recipe added with succes');
+        );
+        $this->is_added = true;
+        session()->flash('success', 'Recipe added with succes');
     }
 
     public function render()
     {
-       $this->ingredients = Ingredient::all();
+
         return view(
-            'livewire.ingredient-component'
+            'livewire.ingredient-component',
+            [
+                'ingredients' => Ingredient::all()
+            ]
         );
     }
 }
