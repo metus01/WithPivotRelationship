@@ -25,11 +25,18 @@
                         <td><button wire:click="start_add({{ $ingredient->id }})" class="btn btn-primary">Add</button></td>
                     </tr>
                     @if ($current_id == $ingredient->id)
-                        <livewire:ingredient-form :recette="$recette" :ingredient="$ingredient" :key="$ingredient->id"></livewire:ingredient-form>
+                        <livewire:ingredient-form :key="$ri->id" :ri="$ri"></livewire:ingredient-form>
+                        {{-- <div class="container">
+                            <form action=""  method="POST" wire:submit='saveIng()'>
+                                <input type="text" name="" placeholder="quantité" id="" wire:model.lazy="quantity" class="form-controle">
+                                <button class="btn btn-success">Valider</button>
+                            </form> --}}
+                        </div>
                     @endif
                     @endforeach
                 </tbody>
             </table>
+            <button class="btn btn-success" wire:click="startAdd">Ajouter un ingrédient </button>
         </div>
     @endif
 </div>

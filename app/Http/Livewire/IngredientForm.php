@@ -4,21 +4,19 @@ namespace App\Http\Livewire;
 
 use App\Models\Ingredient;
 use App\Models\Recette;
+use App\Models\RecetteIngredient;
 use Livewire\Component;
 
 class IngredientForm extends Component
 {
-    public  Ingredient $ingredient;
-    public string $quantity = '';
-    public Recette $recette;
+    public RecetteIngredient $ri;
+    protected $rules = [
+        'ri.quantity' => 'required|min:4'
+    ];
+
     public function save()
     {
-       $this->recette->ingredients()->attach([
-        $this->ingredient->id => [
-            "quantite" => $this->quantity
-        ]
-        ]);
-        $this->emit('finish');
+        dd($this->ri);
     }
     public function render()
     {
